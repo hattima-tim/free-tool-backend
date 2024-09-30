@@ -18,7 +18,7 @@ app.use(limiter);
 
 app.use(
   cors({
-    origin: ["https://www.agencyhandy.com"],
+    origin: ["https://www.agencyhandy.com", "https://agencyhandy.com"],
     methods: "POST, OPTIONS",
     optionsSuccessStatus: 200,
     // origin:true
