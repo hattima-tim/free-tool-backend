@@ -31,8 +31,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", (req, res) => res.sendStatus(200));
 app.use("/free-tools-server-express-test/", indexRouter);
+app.use("/", (req, res) => res.sendStatus(200));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
