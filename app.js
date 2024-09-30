@@ -31,11 +31,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use("/", (req, res) => res.sendStatus(200));
 app.use("/free-tools-server-express-test/", indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404));
+  return res.sendStatus(404);
 });
 
 // error handler
