@@ -9,25 +9,28 @@ dotenv.config();
 
 async function getResponseFromAI(input, temperature, signal, req, next) {
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: "gpt-3.5-turbo-1106",
-        messages: [
-          {
-            role: "user",
-            content: ` ${input}`,
-          },
-        ],
-        temperature: temperature,
-        stream: true,
-      }),
-      signal: signal,
-    });
+    const response = await fetch(
+      "https://amzautoserver.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo-1106",
+          messages: [
+            {
+              role: "user",
+              content: ` ${input}`,
+            },
+          ],
+          temperature: temperature,
+          stream: true,
+        }),
+        signal: signal,
+      }
+    );
 
     return response;
   } catch (err) {
@@ -62,9 +65,9 @@ router.post("/", async function (req, res, next) {
   response.body.pipe(res);
 });
 
-router.get('/',async function(req,res){
-    res.send('Hello something!')
-})
+router.get("/", async function (req, res) {
+  res.send("Hello something!");
+});
 
 // router.post("/", async function (req, res, next) {
 //   const writeStream = fs.createWriteStream("sitemap.txt", { flags: "a" });
